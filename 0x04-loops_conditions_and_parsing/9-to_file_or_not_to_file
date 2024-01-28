@@ -7,7 +7,7 @@ if [ -e "school" ]; then
 	if [ -s "school" ]; then
 		echo "school file is not empty"
 	else
-		cho "school file is empty"
+		echo "school file is empty"
 	fi
 
 	if [ -f "school" ]; then
