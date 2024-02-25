@@ -1,0 +1,26 @@
+https://imgur.com/EOhHDGq.png
+
+Description:
+==> A three server web infrastructure that hosts the website www.foobar.com, it must be secured, serve encrypted traffic, and be monitored.
+
+Some specifics about this infrastructure:
+
+The firewalls:
+
+===> Firewalls prevent unauthorized users or entities from gaining access to the internal network, including web servers. By analyzing incoming and outgoing traffic, firewalls can block attempts to access resources without proper authentication.
+
+The SSL certificate:
+
+===> The SSL certificate is for encrypting the traffic between the web servers and the external network to prevent man-in-the-middle attacks (MITM) and network sniffers from sniffing the traffic which could expose valuable information. The SSL certs ensure privacy, integrity, and identification.
+
+The monitoring clients:
+
+===> The monitoring clients are for monitoring the servers and the external network. They analyse the performance and operations of the servers, measure the overall health, and alert the administrators if the servers are not performing as expected. The monitoring tool observes the servers and provides key metrics about the servers' operations to the administrators. It automatically tests the accessibility of the servers, measures response time, and alerts for errors such as corrupt/missing files, security vulnerabilities/violations, and many other issues.
+
+The issues are with this infrastructure:
+
+=> SSL termination at the load balancer exposes the traffic between the load balancer and web servers to potential security risks as it remains unencrypted during this internal communication.
+
+=> Relying on a single MySQL server for write operations hinders scalability and introduces a single point of failure, impacting the availability and performance of the web infrastructure.
+
+=> Uniform server components can lead to resource contention (CPU, Memory, I/O) and poor performance as they compete for resources. This setup is not easily scalable and may struggle to handle varying workloads efficiently.

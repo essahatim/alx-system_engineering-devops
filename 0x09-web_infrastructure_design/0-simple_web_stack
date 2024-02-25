@@ -1,0 +1,29 @@
+https://imgur.com/eph2EnE.png
+
+Description
+This is a simple web infrastructure that hosts a website that is reachable via www.foobar.com.
+There are no firewalls or SSL certificates for protecting the server's network.
+Each component (database, application server) has to share the resources (CPU, RAM, and SSD) provided by the server.
+
+Some specifics about the infrastructure:
+
+What is a Server:
+===> A server is a computer or system that is dedicated to providing services, resources, or data to other computers, known as clients, over a network. In the context of web infrastructure, servers host websites, applications, or databases and respond to requests from client devices.
+
+Role of the Domain Name:
+===> The domain name is a human-readable alias for the IP address of a server. It provides a way for users to access websites using memorable names (e.g., www.foobar.com) instead of numeric IP addresses. Domain names are translated to IP addresses through the Domain Name System (DNS) when users request to access a website.
+
+Type of DNS Record for www in www.foobar.com:
+===> The DNS record for "www" in www.foobar.com is typically a CNAME (Canonical Name) record. This record is used to alias one domain to another, allowing the domain to resolve to the same IP address as another domain.
+
+Role of the Web Server:
+===> The web server (e.g., Nginx) is responsible for handling HTTP requests from clients (browsers) and serving static content such as HTML pages, images, and CSS files. It may also manage SSL/TLS connections for secure communication and can handle certain types of dynamic content.
+
+Role of the Application Server:
+===> The application server is responsible for executing the business logic and processing dynamic content. It handles more complex tasks, interacts with databases, and generates dynamic web pages. In the context of a three-server infrastructure, the application server works alongside the web server to deliver complete and dynamic web pages.
+
+Role of the Database:
+===> The database (e.g., MySQL) stores and manages the structured data used by the website. It holds information such as user profiles, content, and settings. The application server communicates with the database to retrieve or update data based on user requests.
+
+Communication Between Server and User's Computer:
+===> he server communicates with the user's computer using the HTTP or HTTPS protocol. HTTP (Hypertext Transfer Protocol) is used for non-secure communication, while HTTPS (HTTP Secure) employs SSL/TLS encryption for secure data transmission. The communication involves the exchange of HTTP requests (initiated by the user's browser) and corresponding HTTP responses (sent by the server). 
