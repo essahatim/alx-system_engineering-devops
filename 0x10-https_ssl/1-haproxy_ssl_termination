@@ -1,0 +1,36 @@
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    chroot /var/lib/haproxy
+    stats socket /run/haproxy/admin.sock mode 660 level admin
+    stats timeout 30s
+    user haproxy
+    group haproxy
+    daemon
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+    option  forwardfor
+    option  http-server-close
+
+frontend www_frontend
+    bind *:80
+    bind *:443 ssl crt /etc/letsencrypt/live/www.htmmenana.tech/fullchain.pem
+    reqadd X-Forwarded-Proto:\ https
+    acl    letsencrypt-acl path_beg /.well-known/acme-challenge/
+    use_backend letsencrypt-backend if letsencrypt-acl
+    default_backend www_backend
+
+backend www_backend
+    balance  roundrobin
+    redirect scheme https if !{ ssl_fc }
+    server 420825-web-01 35.175.134.77:80 check
+    server 420825-web-02 54.82.176.227:80 check
+
+
