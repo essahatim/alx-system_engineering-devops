@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Display information about subdomains.
+# Configure the domain zone so that the subdomain www.
+
+domain_information() {
+    local subdomain_info
+    local subdomain
+    local record_type
+
+    subdomain_info=$(dig "$2"."$1" +short)
+    subdomain=$(echo "$subdomain_info" | awk 'NR==1{print}')
+    record_type=$(echo "$subdomain_info" | awk 'NR==2{print}')
+
+    echo "The subdomain $subdomain is a $record_type record and points to $1"
+}
+
+if [ "$#" == 1 ]; then
+    for subdomain in www lb-01 web-01 web-02; do
+        domain_information "$1" "$subdomain"
+    done
+elif [ "$#" == 2 ]; then
+    domain_information "$1" "$2"
+fi
