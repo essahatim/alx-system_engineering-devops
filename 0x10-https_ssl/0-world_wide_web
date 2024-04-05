@@ -8,16 +8,21 @@ domain_information() {
     local record_type
 
     subdomain_info=$(dig "$2"."$1" +short)
-    subdomain=$(echo "$subdomain_info" | awk 'NR==1{print}')
-    record_type=$(echo "$subdomain_info" | awk 'NR==2{print}')
+    subdomain="$2"
+    record_type="A"
+    destination="$subdomain_info"
 
-    echo "The subdomain $subdomain is a $record_type record and points to $1"
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
 if [ "$#" == 1 ]; then
-    for subdomain in www lb-01 web-01 web-02; do
-        domain_information "$1" "$subdomain"
-    done
+    domain_information "$1" "www"
+    domain_information "$1" "lb-01"
+    domain_information "$1" "web-01"
+    domain_information "$1" "web-02"
 elif [ "$#" == 2 ]; then
     domain_information "$1" "$2"
+else
+    echo "Usage: $0 <domain> [<subdomain>]"
+    exit 1
 fi
