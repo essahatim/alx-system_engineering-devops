@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# Nginx configuration to listen on port 80
-sudo sed -i 's/^\s*listen\s*80\s*;/listen 80;/g' /etc/nginx/sites-available/default
-sudo service nginx start
-sudo kill "$(pgrep 'nginx' | head -1)"
