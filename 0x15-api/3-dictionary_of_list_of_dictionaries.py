@@ -1,33 +1,30 @@
 #!/usr/bin/python3
 """
-Script that exports data in the JSON format.
+A script to export data in the JSON format for all employees.
 """
 import json
 import requests
-from sys import argv
 
-if __name__ == '__main__':
-    base_url = "https://jsonplaceholder.typicode.com"
-    all_data = {}
 
-    for employee_id in range(1, 11):
-        user_response = requests.get(f"{base_url}/users/{employee_id}")
-        user_data = user_response.json()
+if __name__ == "__main__":
+    base_url = "https://jsonplaceholder.typicode.com/"
+    users_response = requests.get(base_url + "users")
+    users_data = users_response.json()
 
+    todo_data_all_employees = {}
+    for user in users_data:
+        user_id = user.get("id")
         todos_response = requests.get(
-            f"{base_url}/todos",
-            params={"userId": employee_id}
-        )
+                base_url + "todos",
+                params={"userId": user_id}
+                )
         todos_data = todos_response.json()
-        all_data[str(employee_id)] = []
-        for todo in todos_data:
-            all_data[str(employee_id)].append({
-                "username": user_data["username"],
-                "task": todo["title"],
-                "completed": todo["completed"]
-            })
-    filename = "todo_all_employees.json"
-    with open(filename, 'w') as json_file:
-        json.dump(all_data, json_file, indent=4)
+        user_todos = [{
+            "task": todo.get("title"),
+            "completed": todo.get("completed"),
+            "username": user.get("username")
+        } for todo in todos_data]
+        todo_data_all_employees[user_id] = user_todos
 
-    print(f"Data exported to {filename}")
+    with open("todo_all_employees.json", "w") as jsonfile:
+        json.dump(todo_data_all_employees, jsonfile)

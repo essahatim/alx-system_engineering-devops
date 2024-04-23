@@ -6,6 +6,7 @@ Python script that returns information using REST API.
 import requests
 import sys
 
+
 if __name__ == "__main__":
     employee_id = sys.argv[1]
     url = "https://jsonplaceholder.typicode.com/"
