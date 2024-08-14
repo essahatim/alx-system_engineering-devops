@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """Function that queries the reddit API"""
-import json
 import requests
-import sys
 
 
 def number_of_subscribers(subreddit):
