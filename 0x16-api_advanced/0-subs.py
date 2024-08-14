@@ -13,7 +13,8 @@ def number_of_subscribers(subreddit):
         The number of subscribers to the subreddit
         0 in error
     """
-    headers = {'User-Agent': 'ResortDowntown2584'}
+    headers = headers = {
+            'User-Agent': 'python:subreddit.subscriber.count:v1.0.0 (by /u/ResortDowntown2584)'}
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     response = requests.get(url, headers=headers, allow_redirects=False)
 
