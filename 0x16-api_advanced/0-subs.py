@@ -12,7 +12,7 @@ def number_of_subscribers(subreddit):
         0 in error
     """
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'OkSatisfaction9309'}
+    headers = {'user-agent': 'OkSatisfaction9309'}
     response = requests.get(url, headers=headers, allow_redirects=False)
 
     if response.status_code == 200:
